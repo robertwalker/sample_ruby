@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="Author" content="Eric Stewart" />
+  <meta name="Copyright" content="©2009-2010 Eric Lee Stewart, All Rights Reserved." />
+  <style type="text/css">
+    body { font:normal normal normal 12px/16px Verdana, Helvetica, Arial, sans-serif; color:#000; margin:0px; padding:0px; background:#fff; }
+    table { margin:10px; padding:0px; border-collapse:collapse; border:1px solid #ccc; }
+    tr { margin:0px; padding:0px; border-collapse:collapse; border:0px none #fff; }
+    th { margin:0px; padding:5px 10px; border:1px solid #ccc; vertical-align:center; font-weight:bold; background-color:#e5e5e5; }
+    td { margin:0px; padding:5px 10px; border:1px solid #e5e5e5; vertical-align:center; }
+    img { margin:0px; padding:0px; border-collapse:collapse; border:0px none #fff; display:block; }
+    div { margin:0px; padding:0px; border-collapse:collapse; border:0px none #fff; vertical-align:top; text-align:left; }
+    p { margin:10px; padding:0px; border-collapse:collapse; border:0px none #fff; vertical-align:middle; text-align:left; }
+    h1 { margin: 20px 10px; padding: 0px; font:normal normal bold 16px/20px Verdana, Helvetica, Arial, sans-serif; color:#000;}
+    h2 { margin: 20px 10px; padding: 0px; font:normal normal bold 14px/18px Verdana, Helvetica, Arial, sans-serif; color:#000;}
+    h3 { margin: 15px 10px; padding: 0px; font:normal normal bold 12px/16px Verdana, Helvetica, Arial, sans-serif; color:#000;}
+    pre { margin: 10px; padding: 5px; font:normal normal normal 13px/17px Inconsolata, Verdana, Helvetica, Arial, sans-serif; color:#848484; overflow:auto; border:1px solid #e5e5e5;}
+    var { font-style:normal; color:#848484; }
+    .page { width:1000px; padding:10px; }
+  </style>
+</head>
+
+<body>
+<div class="page">
+<h1>Setup git and gitosis for hosting private repositories.</h1>
+<p>Copy the public ssh key from local machine to the /tmp on the server.</p>
+<pre><code>scp ~/.ssh/id_rsa.pub &lt;host&gt;:/tmp/</code></pre>
+<h2>Shell into the server.</h2>
+<pre><code>ssh &lt;user&gt;@&lt;host&gt;</code></pre>
+<h2>Install required packages.</h2>
+<pre><code>sudo aptitude install git-core
+sudo aptitude install git-doc
+sudo aptitude install python-setuptools</code></pre>
+<h2>Get the gitosis source code.</h2>
+<pre><code>mkdir ~/src
+cd ~/src
+git clone git://eagain.net/gitosis.git</code></pre>
+<h2>Install gitosis</h2>
+<pre><code>cd ~/src/gitosis
+sudo python setup.py install</code></pre>
+<h2>Create a specially configured git user.</h2>
+<pre><code>sudo adduser --system --shell /bin/sh --gecos 'git version control' --group --disabled-password --home /home/git git</code></pre>
+<h2>Initialize gitosis</h2>
+<pre><code>sudo -H -u git gitosis-init &lt; /tmp/id_rsa.pub</code></pre>
+<h2>File permission fix.</h2>
+<pre><code>sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update</code></pre>
+<h2>Server configuration is done.</h2>
+<p>Gitosis can be managed remotely by checking out the gitosis-admin repository and managing the config files.</p>
+<pre><code>git clone git@&lt;host&gt;:gitosis-admin.git</code></pre></div>
+</body>
+</html>

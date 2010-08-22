@@ -1,0 +1,44 @@
+h1. Setup git and gitosis for hosting private repositories.
+
+Copy the public ssh key from local machine to the /tmp on the server.
+
+bc. scp ~/.ssh/id_rsa.pub <host>:/tmp/
+
+h2. Shell into the server.
+
+bc. ssh <user>@<host>
+
+h2. Install required packages.
+
+bc. sudo aptitude install git-core
+sudo aptitude install git-doc
+sudo aptitude install python-setuptools
+
+h2. Get the gitosis source code.
+
+bc. mkdir ~/src
+cd ~/src
+git clone git://eagain.net/gitosis.git
+
+h2. Install gitosis
+
+bc. cd ~/src/gitosis
+sudo python setup.py install
+
+h2. Create a specially configured git user.
+
+bc. sudo adduser --system --shell /bin/sh --gecos 'git version control' --group --disabled-password --home /home/git git
+
+h2. Initialize gitosis
+
+bc. sudo -H -u git gitosis-init < /tmp/id_rsa.pub
+
+h2. File permission fix.
+
+bc. sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update
+
+h2. Server configuration is done.
+
+Gitosis can be managed remotely by checking out the gitosis-admin repository and managing the config files.
+
+bc. git clone git@<host>:gitosis-admin.git

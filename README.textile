@@ -13,3 +13,17 @@ This script was used to transform a CSV data file containing trailer dormancy in
 h2. The import_text_messages script
 
 This script was used to transform a CSV data file containing text messages from a Qualcomm in-cab GPS and messaging system into a SQL script used to import the data into Bennett's Oracle database.
+
+h2. The create_site script
+
+This script is used to create and initialize an Apache web site. It automates a number of typically manual step required to setup a web site and add a user account and other basic tasks required.
+
+This script was created in collaboration with "Eric Stewart":http://www.ericstewart.org/.
+
+h2. The textile_docs_generator script
+
+This script is used to simply the creation of documentation by allowing the writer to use the Textile markup language. The script is used to convert the Textile document into HTML.
+
+See the example "Gitosis_Install" document in both the original Textile source and the HTML output version.
+
+This script was created in collaboration with "Eric Stewart":http://www.ericstewart.org/.
