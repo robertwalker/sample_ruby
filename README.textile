@@ -4,7 +4,7 @@ This project contains an assortment of Ruby scripts mostly used for transforming
 
 h2. The convert_cities scripts
 
-These scripts are used to convert Canada and Mexico city postal data into the format required by Bennett International Groups auto rater system.
+These scripts are used to convert Canada and Mexico city postal data into the format required by Bennett International Group's auto rater system.
 
 h2. The import_dormant script
 
