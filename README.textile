@@ -1,0 +1,15 @@
+h1. Assortment of Ruby scripts
+
+This project contains an assortment of Ruby scripts mostly used for transforming data files from one format to another.
+
+h2. The convert_cities scripts
+
+These scripts are used to convert Canada and Mexico city postal data into the format required by Bennett International Groups auto rater system.
+
+h2. The import_dormant script
+
+This script was used to transform a CSV data file containing trailer dormancy information into an SQL script used to import the data into Bennett's Oracle database.
+
+h2. The import_text_messages script
+
+This script was used to transform a CSV data file containing text messages from a Qualcomm in-cab GPS and messaging system into a SQL script used to import the data into Bennett's Oracle database.
